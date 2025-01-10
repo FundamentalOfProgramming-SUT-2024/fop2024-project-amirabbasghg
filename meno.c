@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+//kjshdjksd
 
 int ramz(const char *r) {
     int lr = strlen(r);
