@@ -14,14 +14,9 @@ struct nre {
     int g;
     int he;
     int hu;
-    struct Telesm telesm;
+   
 };
-struct Telesm
-{
-    int Health;
-    int speed;
-    int damage;
-};
+
 
 struct nre homes[MAX_USERS];
 int n = 0;
@@ -248,9 +243,7 @@ int main() {
                     strcpy(homes[n].e, e);
                     homes[n].he = 20;
                     homes[n].hu = 20;
-                    homes[n].telesm.Health = 0;
-                    homes[n].telesm.damage = 0;
-                    homes[n].telesm.speed = 0;
+                  
                     // homes[n].g = 0;
                     n++;
                     printw("Signup successful\n");
