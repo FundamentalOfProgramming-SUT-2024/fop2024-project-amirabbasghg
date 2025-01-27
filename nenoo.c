@@ -12,12 +12,20 @@ struct nre {
     char r[100];
     char e[100];
     int g;
+    int he;
+    int hu;
+    struct Telesm telesm;
+};
+struct Telesm
+{
+    int Health;
+    int speed;
+    int damage;
 };
 
 struct nre homes[MAX_USERS];
 int n = 0;
 
-// Function to validate the password
 int ramz(const char *r) {
     int lr = strlen(r);
     if (lr >= 7) {
@@ -50,7 +58,6 @@ int email(const char *e) {
     return atCount == 1 && dotCount == 1;
 }
 
-// Check if the username already exists
 int nameExists(const char *name) {
     for (int i = 0; i < n; i++) {
         if (strcmp(homes[i].name, name) == 0) {
@@ -60,7 +67,6 @@ int nameExists(const char *name) {
     return 0; 
 }
 
-// Login function
 int login(int *m) {
     char username[100], password[100];
 
@@ -129,7 +135,24 @@ void displayScoreboard() {
     // Display the sorted scoreboard
     clear();
     printw("Scoreboard:\n\n");
-    for (int i = 0; i < n; i++) {
+    start_color();
+            
+            int pink = 8;
+    init_color(pink, 1000, 752, 796); // RGB values scaled to 1000
+    init_pair(1, pink, COLOR_BLACK);
+            attron(A_BOLD|COLOR_PAIR(1));
+            printw("%s: %d\n", sorted[0].name, sorted[0].g);
+            attroff(A_BOLD|COLOR_PAIR(1));
+            init_pair(2,COLOR_BLUE,COLOR_BLACK);
+            init_pair(3,COLOR_GREEN,COLOR_BLACK);
+            attron(A_BOLD|COLOR_PAIR(2));
+            printw("%s: %d\n", sorted[1].name, sorted[1].g);
+            attroff(A_BOLD|COLOR_PAIR(2));
+            attron(A_BOLD|COLOR_PAIR(3));
+            printw("%s: %d\n", sorted[2].name, sorted[2].g);
+            attroff(A_BOLD|COLOR_PAIR(3));
+    
+    for (int i = 3; i < n; i++) {
         printw("%s: %d\n", sorted[i].name, sorted[i].g);
     }
     getch();
@@ -137,7 +160,7 @@ void displayScoreboard() {
 
 // Display menu and handle user selection
 int showMenu(int logged_in) {
-    const char *options_logged_out[] = {"Signup", "Login", "Exit", "Scoreboard"};
+    const char *options_logged_out[] = {"Signup", "Login", "Exit", "Scoreboard",};
     const char *options_logged_in[] = {"Logout"};
     int choice = 0;
     int highlight = 0;
@@ -223,6 +246,12 @@ int main() {
                     strcpy(homes[n].name, name);
                     strcpy(homes[n].r, r);
                     strcpy(homes[n].e, e);
+                    homes[n].he = 20;
+                    homes[n].hu = 20;
+                    homes[n].telesm.Health = 0;
+                    homes[n].telesm.damage = 0;
+                    homes[n].telesm.speed = 0;
+                    // homes[n].g = 0;
                     n++;
                     printw("Signup successful\n");
                 } else {
