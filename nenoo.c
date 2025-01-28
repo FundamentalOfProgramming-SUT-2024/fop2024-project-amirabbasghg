@@ -14,13 +14,19 @@ struct nre {
     int g;
     int he;
     int hu;
-   
+    struct Telesm telesm;
 };
-
+struct Telesm
+{
+    int Health;
+    int speed;
+    int damage;
+};
 
 struct nre homes[MAX_USERS];
 int n = 0;
 
+// Function to validate the password
 int ramz(const char *r) {
     int lr = strlen(r);
     if (lr >= 7) {
@@ -53,6 +59,7 @@ int email(const char *e) {
     return atCount == 1 && dotCount == 1;
 }
 
+// Check if the username already exists
 int nameExists(const char *name) {
     for (int i = 0; i < n; i++) {
         if (strcmp(homes[i].name, name) == 0) {
@@ -62,6 +69,7 @@ int nameExists(const char *name) {
     return 0; 
 }
 
+// Login function
 int login(int *m) {
     char username[100], password[100];
 
@@ -243,7 +251,9 @@ int main() {
                     strcpy(homes[n].e, e);
                     homes[n].he = 20;
                     homes[n].hu = 20;
-                  
+                    homes[n].telesm.Health = 0;
+                    homes[n].telesm.damage = 0;
+                    homes[n].telesm.speed = 0;
                     // homes[n].g = 0;
                     n++;
                     printw("Signup successful\n");
